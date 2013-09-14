@@ -1,0 +1,51 @@
+<h1>Listing items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.name %></td>
+        <td><%= item.url %></td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Url</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rakuten_items.each do |item| %>
+      <tr>
+        <td></td>
+        <td><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></td>
+        <td><%= item['itemUrl'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<<br>
+
+<%= link_to 'New Item', new_item_path %>

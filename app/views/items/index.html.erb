@@ -1,51 +1,213 @@
-<h1>Listing items</h1>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Url</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.id %></td>
-        <td><%= item.name %></td>
-        <td><%= item.url %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<meta name="keywords" content="キーワード1,キーワード2,キーワード3">
+<meta name="description" content="このページに関する簡単な説明。">
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Url</th>
-    </tr>
-  </thead>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 
-  <tbody>
+<title>JShop</title>
+
+</head>
+<body>
+
+<!-- コンテナ開始 -->
+<div id="container">
+
+<!-- ページ開始 -->
+<div id="page">
+
+
+<!-- ヘッダ開始 -->
+<div id="header">
+
+<h1 class="siteTitle"><img src="./image/site_title2.gif" alt="サイトのタイトル" width="229" height="27"></h1>
+
+
+
+<ul class="guide">
+<li class="first"><a href="#">FAQ</a></li>
+<li><a href="#">アクセス</a></li>
+<li><a href="#">サイトマップ</a></li>
+</ul>
+
+<div class="opening">
+
+<h2><img src="image/top_image2.gif" alt="テンプレート" width="840" height="260"></h2>
+
+</div>
+
+<ul class="nl clearFix">
+<li class="active"><a href="type1_design2_top.html">ホーム <span class="en">Home</span></a></li>
+<li><a href="type1_design2_low.html">サービス内容 <span class="en">Service</span></a></li>
+
+</ul>
+
+<hr class="none">
+
+</div>
+<!-- ヘッダ終了 -->
+
+
+<!-- コンテンツ開始 -->
+<div id="content">
+
+
+<!-- メインカラム開始 -->
+<div id="main">
+
+<div class="section emphasis">
+
+<div class="heading">
+<h2>ご利用について</h2>
+</div>
+
+<p>まずはじめに、「<a href="../../docs/note.html">ご利用について</a>」と「<a href="../../docs/rule.html">ご利用規約</a>」を必ずご覧になってください。</p>
+
+<p><a href="../type1_design2.html">前のページに戻る</a></p>
+
+</div>
+
+<div class="section normal update">
+
+<div class="heading">
+<h2>商品情報</h2>
+</div>
+
+<dl class="clearFix">
     <% @rakuten_items.each do |item| %>
-      <tr>
-        <td></td>
-        <td><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></td>
-        <td><%= item['itemUrl'] %></td>
-      </tr>
+      <dd><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></dd>
     <% end %>
-  </tbody>
-</table>
+</dl>
 
-<<br>
+</div>
 
-<%= link_to 'New Item', new_item_path %>
+<div class="section normal">
+
+<div class="heading">
+<h2>内容について</h2>
+</div>
+
+<p>仮</p>
+
+<p>仮に関する説明は、<a href="type1_design2_low.html">下層ページ内にてご覧いただけます</a>。</p>
+
+</div>
+
+<div class="section normal">
+
+<div class="heading">
+<h2>カスタマイズサービス</h2>
+</div>
+
+<p><仮/p>
+
+<p>外国人向け方のサービスとなります</p>
+
+<p><a href="../../service/index.html">サービスのご案内</a></p>
+
+</div>
+
+</div>
+<!-- メインカラム終了 -->
+
+
+<!-- サイドバー開始 -->
+<div id="nav">
+
+<div class="section emphasis">
+
+<div class="heading">
+<h2>ピックアップ</h2>
+</div>
+
+<p><a href="#">特に告知したいコンテンツに対してここからリンク。</a></p>
+
+
+
+</div>
+
+<div class="section strong">
+
+<div class="heading">
+<h2>ピックアップ</h2>
+</div>
+
+<p><a href="#">特に告知したいコンテンツに対してここからリンク。</a></p>
+
+<p>画像を配置すると効果的かもしれません。</p>
+
+</div>
+
+
+
+<div class="section normal contact">
+
+<div class="heading">
+<h2>お問い合わせ</h2>
+</div>
+
+<p>お気軽にお問い合わせください。</p>
+
+<p class="tel">Tel 03-0000-0000</p>
+
+
+
+<p class="form"><a href="#">お問い合わせ</a></p>
+
+</div>
+
+</div>
+<!-- サイドバー終了 -->
+
+
+<hr class="clear">
+
+</div>
+<!-- コンテンツ終了 -->
+
+
+<!-- フッタ開始 -->
+<div id="footer">
+
+<ul class="nl">
+<li class="first"><a href="type1_design2_top.html">ホーム</a></li>
+<li><a href="type1_design2_low.html">サービス内容</a></li>
+<li><a href="#">制作実績</a></li>
+<li><a href="#">料金表</a></li>
+<li><a href="#">会社案内</a></li>
+<li><a href="#">お問い合わせ</a></li>
+</ul>
+
+<ul class="nl guide">
+<li class="first"><a href="#">FAQ</a></li>
+<li><a href="#">プライバシーポリシー</a></li>
+<li><a href="#">アクセス</a></li>
+<li><a href="#">サイトマップ</a></li>
+</ul>
+
+<address>
+東京都北区0-0-0 タグインデックスビル10F TEL 03-0000-0000
+<br>
+Copyright (C) 2013　JShop. All Rights Reserved.
+</address>
+
+</div>
+<!-- フッタ終了 -->
+
+
+</div>
+<!-- ページ終了 -->
+
+</div>
+<!-- コンテナ終了 -->
+
+</body>
+</html>
+
+

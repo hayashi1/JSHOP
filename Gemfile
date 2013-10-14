@@ -46,3 +46,7 @@ end
 gem 'execjs'
 gem 'therubyracer'
 gem 'httpclient'
+
+group :test do
+  gem 'rspec-rails'
+end

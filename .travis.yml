@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+- 2.0.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: hFdXH4iMkON0Lf7nY6y57mN+dspkooz6yRRnpQyydHLSZsT2sgBTC9tChxu55nlL14PNob99fvrpYFHaJTEXf7WydZfrfnv4ygtu0wvqSYboANSiumGQEAniy/fCwMq5T41T8NGrMgTn5X6+IgnPzqn3L0iv53sCv7rwq1pixUE=
+  app: jshop
+  on:
+    repo: hayashi1/JSHOP

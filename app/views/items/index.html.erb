@@ -79,10 +79,8 @@
 <h2>商品情報</h2>
 </div>
 
-<dl class="clearFix">
-    <% @rakuten_items.each do |item| %>
-      <dd><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></dd>
-    <% end %>
+<dl class="clearFix" id="rakuten_items">
+    <%= render 'items', items: @rakuten_items %>
 </dl>
 
 </div>

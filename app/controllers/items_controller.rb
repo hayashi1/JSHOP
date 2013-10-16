@@ -1,17 +1,20 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  # before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
-
     @rakuten_items = Item.getRakutenItems;
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
+  end
+
+  def search
+    rakuten_items = Item.getRakutenItems(params[:locate]);
+    render partial: 'items', locals: { items: rakuten_items }
   end
 
   # GET /items/new

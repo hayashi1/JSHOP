@@ -1,5 +1,6 @@
 Jshop::Application.routes.draw do
-  resources :items
+  resources :items, only: 'index'
+  get '/items/search/:locate' => 'items#search'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

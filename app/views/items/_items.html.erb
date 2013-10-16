@@ -1,0 +1,4 @@
+    <% items.each do |item| %>
+      <dd><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></dd>
+    <% end %>
+

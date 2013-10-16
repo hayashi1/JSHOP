@@ -8,3 +8,4 @@ deploy:
   app: jshop
   on:
     repo: hayashi1/JSHOP
+  script: bundle exec rspec spec

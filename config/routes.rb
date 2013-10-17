@@ -1,4 +1,5 @@
 Jshop::Application.routes.draw do
+  root 'items#index'
   resources :items, only: 'index'
   get '/items/search/:locate' => 'items#search'
 

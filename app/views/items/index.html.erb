@@ -9,6 +9,18 @@
 <meta name="keywords" content="キーワード1,キーワード2,キーワード3">
 <meta name="description" content="このページに関する簡単な説明。">
 
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+<script type="text/javascript" src="/javascript/pref_omiyage.js"></script>
+<style>
+	#map-canvas {
+		height: 600px;
+		width: 540px;
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
+
 
 <title>JShop</title>
 
@@ -25,8 +37,6 @@
 <div id="header">
 
 <h1 class="siteTitle"><img src="./image/site_title2.gif" alt="サイトのタイトル" width="229" height="27"></h1>
-
-<div id="map-canvas" style="height:100%"></div>
 
 <ul class="guide">
 <li class="first"><a href="#">FAQ</a></li>
@@ -74,11 +84,14 @@
 <div class="section normal update">
 
 <div class="heading">
+<div id="map-canvas"></div>
 <h2>商品情報</h2>
 </div>
 
 <dl class="clearFix" id="rakuten_items">
+	<!--
     <%= render 'items', items: @rakuten_items %>
+	-->
 </dl>
 
 </div>

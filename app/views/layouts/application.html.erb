@@ -5,92 +5,9 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-  <script>
-  /*
-  	var geocoder;
-	var map;
-	var infowindow = new google.maps.InfoWindow();
-	var marker;
-
-  	function initialize (){
-		navigator.geolocation.getCurrentPosition(function(position){
-			geocoder = new google.maps.Geocoder();
-			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.latitude);
-
-			//debug
-			console.log(position.coords.latitude);
-			console.log(position.coords.longitude);
-
-			var mapOptions = {
-				zoom: 8,
-				center: latlng,
-				mapTypeId: 'roadmap'
-			}
-
-			//第1引数: DOM要素 第2引数: マップの設定オブジェクト
-			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		});
-	}
-
-	function codeLatLng() {
-		console.log('codeLatLng run');
-		//var lat = navigator.coords.latitude;
-		//var lng = navigator.coords.longitude;
-
-		navigator.geolocation.getCurrentPosition(function(position){
-			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-			//逆ジオコーディング実行処理
-			var geocoder = new google.maps.Geocoder();
-			var map = new google.maps.Map();
-
-			geocoder.geocode({'latLng': latlng}, function(results, status){
-				if ( status = google.maps.GeocoderStatus.OK ) {
-					if ( results[1] ) {
-						map.setZoom(11);
-						marker = new google.maps.Marker({
-							position: latlng,
-							map: map
-						});
-
-						infowindow.setContent(results[1].formatted_address);
-						infowindow.open(map, marker);
-					} else {
-						//存在しない場合
-						alert('No results found');
-					}
-				} else {
-					//ジオコーディングに失敗した場合
-					alert('Geocoder faild');
-				}
-			});	
-		});
-	}
-
-	window.addEventListener('load', function(){
-		google.maps.event.addDomListener(window, 'load', initialize);	
-		document.getElementById('get-position').addEventListener('click', codeLatLng, false);
-	}, false);
-	*/
-	var map;
-	var latlng;
-
-	function initialize() {
-		var mapOptions = {
-			zoom: 8,
-			center: latlng,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-
-		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
 </head>
 <body>
-<button id="get-position">現在地を取得</button>
+
 <%= yield %>
 
 </body>

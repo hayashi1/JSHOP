@@ -2,12 +2,24 @@
 <html lang="ja">
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 
 <meta name="keywords" content="キーワード1,キーワード2,キーワード3">
 <meta name="description" content="このページに関する簡単な説明。">
+
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+<script type="text/javascript" src="/javascript/pref_omiyage.js"></script>
+<style>
+	#map-canvas {
+		height: 600px;
+		width: 540px;
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
 
 
 <title>JShop</title>
@@ -24,25 +36,23 @@
 <!-- ヘッダ開始 -->
 <div id="header">
 
-<h1 class="siteTitle"><img src="./image/site_title2.gif" alt="サイトのタイトル" width="229" height="27"></h1>
-
-<div id="map-canvas" style="height:100%"></div>
+<h1 class="siteTitle"><img src="./image/site_title2.jpg" alt="Title of site" width="229" height="27"></h1>
 
 <ul class="guide">
 <li class="first"><a href="#">FAQ</a></li>
-<li><a href="#">アクセス</a></li>
-<li><a href="#">サイトマップ</a></li>
+<li><a href="#">Access</a></li>
+<li><a href="#">Site Map</a></li>
 </ul>
 
 <div class="opening">
 
-<h2><img src="image/top_image2.gif" alt="テンプレート" width="840" height="260"></h2>
+<h2><img src="image/top_image2.gif" alt=" " width="840" height="260"></h2>
 
 </div>
 
 <ul class="nl clearFix">
-<li class="active"><a href="type1_design2_top.html">ホーム <span class="en">Home</span></a></li>
-<li><a href="type1_design2_low.html">サービス内容 <span class="en">Service</span></a></li>
+<li class="active"><a href="type1_design2_top.html">Home <span class="en">Home</span></a></li>
+<li><a href="type1_design2_low.html">Service contents <span class="en">Service</span></a></li>
 
 </ul>
 
@@ -62,23 +72,26 @@
 <div class="section emphasis">
 
 <div class="heading">
-<h2>ご利用について</h2>
+<h2>Terms of Use</h2>
 </div>
 
-<p>まずはじめに、「<a href="../../docs/note.html">ご利用について</a>」と「<a href="../../docs/rule.html">ご利用規約</a>」を必ずご覧になってください。</p>
+<p>First, 「<a href="../../docs/note.html">for use with</a>」「<a href="../../docs/rule.html">Terms of Service</a>」, please certainly seeing</p>
 
-<p><a href="../type1_design2.html">前のページに戻る</a></p>
+<p><a href="../type1_design2.html">I go back to the previous page</a></p>
 
 </div>
 
 <div class="section normal update">
 
 <div class="heading">
-<h2>商品情報</h2>
+<div id="map-canvas"></div>
+<h2>Merchandise information</h2>
 </div>
 
 <dl class="clearFix" id="rakuten_items">
+	<!--
     <%= render 'items', items: @rakuten_items %>
+	-->
 </dl>
 
 </div>
@@ -86,26 +99,26 @@
 <div class="section normal">
 
 <div class="heading">
-<h2>内容について</h2>
+<h2>The contents</h2>
 </div>
 
-<p>仮</p>
+<p>Provisional</p>
 
-<p>仮に関する説明は、<a href="type1_design2_low.html">下層ページ内にてご覧いただけます</a>。</p>
+<p>A description of the provisional,<a href="type1_design2_low.html"> can be found at the lower page .</a></p>
 
 </div>
 
 <div class="section normal">
 
 <div class="heading">
-<h2>カスタマイズサービス</h2>
+<h2>Customization services</h2>
 </div>
 
-<p><仮/p>
+<p>Provisional </p>
 
-<p>外国人向け方のサービスとなります</p>
+<p>It is a service for foreigners how</p>
 
-<p><a href="../../service/index.html">サービスのご案内</a></p>
+<p><a href="../../service/index.html">Service guide</a></p>
 
 </div>
 
@@ -119,10 +132,10 @@
 <div class="section emphasis">
 
 <div class="heading">
-<h2>ピックアップ</h2>
+<h2>Pickup</h2>
 </div>
 
-<p><a href="#">特に告知したいコンテンツに対してここからリンク。</a></p>
+<p><a href="#">Link from here to the content you want to notice in particular.</a></p>
 
 
 
@@ -131,12 +144,12 @@
 <div class="section strong">
 
 <div class="heading">
-<h2>ピックアップ</h2>
+<h2>Pickup</h2>
 </div>
 
-<p><a href="#">特に告知したいコンテンツに対してここからリンク。</a></p>
+<p><a href="#">Link from here to the content you want to notice in particular.</a></p>
 
-<p>画像を配置すると効果的かもしれません。</p>
+<p>It may be useful to place the image.</p>
 
 </div>
 
@@ -145,16 +158,16 @@
 <div class="section normal contact">
 
 <div class="heading">
-<h2>お問い合わせ</h2>
+<h2>Contact Us</h2>
 </div>
 
-<p>お気軽にお問い合わせください。</p>
+<p>Please feel free to inquire.</p>
 
 <p class="tel">Tel 03-0000-0000</p>
 
 
 
-<p class="form"><a href="#">お問い合わせ</a></p>
+<p class="form"><a href="#">Contact Us</a></p>
 
 </div>
 
@@ -172,23 +185,23 @@
 <div id="footer">
 
 <ul class="nl">
-<li class="first"><a href="type1_design2_top.html">ホーム</a></li>
-<li><a href="type1_design2_low.html">サービス内容</a></li>
-<li><a href="#">制作実績</a></li>
-<li><a href="#">料金表</a></li>
-<li><a href="#">会社案内</a></li>
-<li><a href="#">お問い合わせ</a></li>
+<li class="first"><a href="type1_design2_top.html">Home</a></li>
+<li><a href="type1_design2_low.html">Service contents</a></li>
+<li><a href="#">Portfolio</a></li>
+<li><a href="#">Price list</a></li>
+<li><a href="#">About us</a></li>
+<li><a href="#">Contact Us</a></li>
 </ul>
 
 <ul class="nl guide">
 <li class="first"><a href="#">FAQ</a></li>
-<li><a href="#">プライバシーポリシー</a></li>
-<li><a href="#">アクセス</a></li>
-<li><a href="#">サイトマップ</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Access</a></li>
+<li><a href="#">Site Map</a></li>
 </ul>
 
 <address>
-東京都北区0-0-0 タグインデックスビル10F TEL 03-0000-0000
+Kita-ku, Tokyo 0-0-0 tag index Building 10F TEL 03-0000-0000
 <br>
 Copyright (C) 2013　JShop. All Rights Reserved.
 </address>

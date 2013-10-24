@@ -2,7 +2,6 @@ class Item < ActiveRecord::Base
   def self.getRakutenItems(locate='')
     rakuten_items = [];
     begin
-      locate = self.cutLocate(locate) if locate.present
       httpClient = HTTPClient.new
       data = httpClient.get_content('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805', {
         'applicationId' =>'1040308007638376273',

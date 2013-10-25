@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
       data = httpClient.get_content('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805', {
         'applicationId' =>'1040308007638376273',
         'affiliateId'   =>'11b678a4.eca51fe8.11b678a5.89b6a8b9',
-        'keyword'       => locate << '　お土産',
+        'keyword'       => self.cutLocate(locate) << '　土産',
         'hits'          => 20,
         'page'          => 1
       })
@@ -27,7 +27,8 @@ class Item < ActiveRecord::Base
   end
 
   private
+  # 北海道以外は末尾の都府県を取り除く
   def self.cutLocate(locate)
-    /都|府|県/u =~ locate ? locate[0, (locate.length-1)] : locate
+    locate.gsub(/(都|府|県)$/u, "")
   end
 end

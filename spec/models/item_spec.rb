@@ -4,7 +4,7 @@ describe 'Item' do
   context 'getRakutenItems' do
     it '引数なし' do
       items = Item.getRakutenItems();
-      expect(items).to have_at_least(1).items
+      expect(items).to have(0).items
     end
     it '引数あり' do
       items = Item.getRakutenItems('東京');

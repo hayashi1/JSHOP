@@ -1,4 +1,10 @@
-    <% items.each do |item| %>
-      <dd><%= link_to(truncate(item['itemName'],{length:30}), item['itemUrl'], {target: '_blank'}) %></dd>
+    <% item_groups = items.in_groups_of(4) %>
+    <% item_groups.each do |item_group| %>
+      <ul class="small-block-grid-4">
+        <% item_group.each do |item| %>
+          <% item_image = image_tag(item['smallImageUrls'][0]['imageUrl'], size:'64x64', alt:item['itemName']) %>
+          <li><%= link_to(item_image, item['itemUrl'], target: '_blank') %></li>
+        <% end %>
+      </ul>
     <% end %>
 

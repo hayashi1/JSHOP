@@ -1,151 +1,48 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <meta http-equiv="Content-Script-Type" content="text/javascript">
-  <meta name="keywords" content="キーワード1,キーワード2,キーワード3">
-  <meta name="description" content="このページに関する簡単な説明。">
+<% content_for :title do %>
+JSHOP - Items
+<% end %>
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-  <script type="text/javascript" src="/javascript/pref_omiyage.js"></script>
-
-  <title>JShop</title>
-</head>
-
-<body>
-  <!-- コンテナ開始 -->
-  <div id="container">
-    <!-- ページ開始 -->
-    <div id="page">
-      <!-- ヘッダ開始 -->
-      <div id="header">
-        <!--
-        <h1 class="siteTitle"><img src="./image/site_title2.jpg" alt="Title of site" width="229" height="27"></h1>
-        -->
-        <h1 class="siteTitle">JSHOP</h1>
-
-        <ul class="guide">
-          <li class="first"><a href="#">FAQ</a></li>
-          <li><a href="#">Access</a></li>
-          <li><a href="#">Site Map</a></li>
-        </ul>
-
-        <div class="opening">
-          <!--<h2><img src="image/top_image2.gif" alt=" " width="840" height="260"></h2>-->
-          <h2></h2>
-        </div>
-
-        <ul class="nl clearFix">
-          <li class="active"><a href="type1_design2_top.html">Home <span class="en">Home</span></a></li>
-          <li><a href="type1_design2_low.html">Service contents <span class="en">Service</span></a></li>
-        </ul>
-
-        <hr class="none">
-      </div>
-      <!-- ヘッダ終了 -->
-
-      <!-- コンテンツ開始 -->
-      <div id="content">
-        <!-- メインカラム開始 -->
-        <div id="main">
-          <div class="section emphasis">
-            <div class="heading">
-              <h2>Terms of Use</h2>
-            </div>
-            <p>First, 「<a href="../../docs/note.html">for use with</a>」「<a href="../../docs/rule.html">Terms of Service</a>」, please certainly seeing</p>
-            <p><a href="../type1_design2.html">I go back to the previous page</a></p>
-          </div>
-
-          <div class="section normal update">
-            <div class="heading">
-              <div id="map-canvas"></div>
-              <h2>Merchandise information</h2>
-            </div>
-            <dl class="clearFix" id="rakuten_items">
-              <%= render 'items', items: @rakuten_items %>
-            </dl>
-          </div>
-
-          <div class="section normal">
-            <div class="heading">
-              <h2>The contents</h2>
-            </div>
-            <p>Provisional</p>
-            <p>A description of the provisional,<a href="type1_design2_low.html"> can be found at the lower page .</a></p>
-          </div>
-
-          <div class="section normal">
-            <div class="heading">
-              <h2>Customization services</h2>
-            </div>
-            <p>Provisional </p>
-            <p>It is a service for foreigners how</p>
-            <p><a href="../../service/index.html">Service guide</a></p>
-          </div>
-        </div>
-        <!-- メインカラム終了 -->
-
-        <!-- サイドバー開始 -->
-        <div id="nav">
-          <div class="section emphasis">
-            <div class="heading">
-              <h2>Pickup</h2>
-            </div>
-            <p><a href="#">Link from here to the content you want to notice in particular.</a></p>
-          </div>
-
-          <div class="section strong">
-            <div class="heading">
-              <h2>Pickup</h2>
-            </div>
-            <p><a href="#">Link from here to the content you want to notice in particular.</a></p>
-            <p>It may be useful to place the image.</p>
-          </div>
-
-          <div class="section normal contact">
-            <div class="heading">
-              <h2>Contact Us</h2>
-            </div>
-            <p>Please feel free to inquire.</p>
-            <p class="tel">Tel 03-0000-0000</p>
-            <p class="form"><a href="#">Contact Us</a></p>
-          </div>
-        </div>
-        <!-- サイドバー終了 -->
-
-        <hr class="clear">
-      </div>
-      <!-- コンテンツ終了 -->
-
-      <!-- フッタ開始 -->
-      <div id="footer">
-        <ul class="nl">
-          <li class="first"><a href="type1_design2_top.html">Home</a></li>
-          <li><a href="type1_design2_low.html">Service contents</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Price list</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-
-        <ul class="nl guide">
-          <li class="first"><a href="#">FAQ</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Access</a></li>
-          <li><a href="#">Site Map</a></li>
-        </ul>
-
-        <address>
-          Kita-ku, Tokyo 0-0-0 tag index Building 10F TEL 03-0000-0000
-          <br>
-          Copyright (C) 2013　JShop. All Rights Reserved.
-        </address>
-      </div>
-      <!-- フッタ終了 -->
-    </div>
-    <!-- ページ終了 -->
+<h2>Location</h2>
+<div id="map-canvas"></div>
+<br/>
+<div class="row">
+  <div class="small-6 small-centered columns">
+    <%= button_to_function('reload', 'location.reload()', {class:'tiny button secondary'}) %>
   </div>
-  <!-- コンテナ終了 -->
-</body>
-</html>
+</div>
+
+<h2>Souvenir</h2>
+<div class="section-container auto" data-section id="sticker">
+  <section class="active">
+    <p class="title" data-section-title><a href="#panel1">All</a></p>
+    <div class="content" data-section-content>
+      <h3>All</h3>
+      <div id="all">
+        <%= render 'items', items: @rakuten_items %>
+      </div>
+    </div>
+  </section>
+  <section>
+    <p class="title" data-section-title><a href="#panel2">Foods</a></p>
+    <div class="content" data-section-content>
+      <h3>Foods</h3>
+      <div id="foods">
+        <%= render 'items', items: @rakuten_items %>
+      </div>
+    </div>
+  </section>
+  <section>
+    <p class="title" data-section-title><a href="#panel3">Others</a></p>
+    <div class="content" data-section-content>
+      <h3>Others</h3>
+      <div id="others">
+        <%= render 'items', items: @rakuten_items %>
+      </div
+    </div>
+  </section>
+</div>
+<script>
+$(document).ready(function(){
+  google.maps.event.addDomListener(window, 'load', initialize);
+});
+</script>

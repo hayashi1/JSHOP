@@ -43,8 +43,9 @@ function initialize() {
 								infowindow.open(map, marker);
 
 								//おみやげ情報の取得
+								//all
 								$.ajax({
-									url: '/items/search/' + value.long_name,
+									url: '/items/search/' + value.long_name + '?type=all',
 									settings: {
 										type: 'GET',
 										ataType: 'html'
@@ -54,7 +55,37 @@ function initialize() {
 									console.log(data);
 
 									//document.getElementById('rakutem-items').innerHTML(data);
-									$('#rakuten_items').html(data);
+									$('#all').html(data);
+								}).fail(function(data){
+									console.log('fail');
+								});
+								//foods
+								$.ajax({
+									url: '/items/search/' + value.long_name + '?type=foods',
+									settings: {
+										type: 'GET',
+										ataType: 'html'
+									}
+								}).done(function(data){
+									console.log('success');
+									console.log(data);
+
+									//document.getElementById('rakutem-items').innerHTML(data);
+									$('#foods').html(data);
+								}).fail(function(data){
+									console.log('fail');
+								});
+								//others
+								$.ajax({
+									url: '/items/search/' + value.long_name + '?type=others',
+									settings: {
+										type: 'GET',
+										ataType: 'html'
+									}
+								}).done(function(data){
+									console.log('success');
+									console.log(data);
+									$('#others').html(data);
 								}).fail(function(data){
 									console.log('fail');
 								});

@@ -45,9 +45,13 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
 gem 'execjs'
 gem 'therubyracer'
 gem 'httpclient'
+gem 'jquery-ui-rails'
+gem 'compass-rails'
+gem 'zurb-foundation'
 
 group :test do
   gem 'rspec-rails'

@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @rakuten_items = Item.getRakutenItems;
+    @rakuten_items = Item.get_rakuten_items;
   end
 
   # GET /items/1
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    rakuten_items = Item.getRakutenItems(params[:locate]);
+    rakuten_items = Item.get_rakuten_items(params[:locate], params[:type]);
     render partial: 'items', locals: { items: rakuten_items }
   end
 

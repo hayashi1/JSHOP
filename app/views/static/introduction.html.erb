@@ -1,15 +1,22 @@
 <% content_for :title do %>
-JSHOP - Introduction
+JSHOPへようこそ
 <% end %>
 
 <p>
-Welcome!<br/>
-This site introduce japanese souvenir.<br/>
-This site get your geo location and introduce there souvenir.<br/>
+お土産品『勝手に』ランキングサイトへようこそ。<br/>
+このサイトでは、現在地の情報と引き換えに、<br/>
+現在地でのお土産品のランキング情報を提供します。<br/>
+是非、お土産品の購入の際に、ご参考にしてください。<br/>
+<br/>
+次のランキング情報の画面に進まれる場合には、<br/>
+下にある「現在地情報を送る」ボタンを押してください。<br/>
+<br/>
+※注意：このサイトのお土産品のランキングは<br/>
+楽天のAPIを基にした、ランキング情報です。<br/>
 </p>
 
 <div class="row">
   <div class="small-6 small-centered columns">
-    <%= link_to('Send Location', {controller:'items', action:'index'}, {class:'button'}) %>
+    <%= link_to('現在地情報を送る', {controller:'items', action:'index'}, {class:'button'}) %>
   </div>
 </div>

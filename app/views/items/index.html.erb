@@ -1,48 +1,68 @@
 <% content_for :title do %>
-JSHOP - Items
+JSHOP - お土産情報
 <% end %>
 
-<h2>Location</h2>
-<div id="map-canvas"></div>
+<h2>現在地</h2>
+<div id="map-canvas">
+  Now Loading...
+</div>
 <br/>
 <div class="row">
   <div class="small-6 small-centered columns">
-    <%= button_to_function('reload', 'location.reload()', {class:'tiny button secondary'}) %>
+    <%= button_to_function('リロード', 'location.reload()', {class:'tiny button secondary'}) %>
   </div>
 </div>
+<input type="hidden" id="locate" name="locate" value="">
 
-<h2>Souvenir</h2>
-<div class="section-container tabs" data-section="tabs">
-  <section class="active">
-    <p class="title" data-section-title><a href="#panel1">All</a></p>
-    <div class="content" data-section-content>
-      <h3>All</h3>
-      <div id="all">
-        <%= render 'items', items: @rakuten_items %>
-      </div>
-    </div>
-  </section>
-  <section>
-    <p class="title" data-section-title><a href="#panel2">Foods</a></p>
-    <div class="content" data-section-content>
-      <h3>Foods</h3>
-      <div id="foods">
-        <%= render 'items', items: @rakuten_items %>
-      </div>
-    </div>
-  </section>
-  <section>
-    <p class="title" data-section-title><a href="#panel3">Others</a></p>
-    <div class="content" data-section-content>
-      <h3>Others</h3>
-      <div id="others">
-        <%= render 'items', items: @rakuten_items %>
-      </div
-    </div>
-  </section>
+<a name="first"></a>
+<h2>東京のお土産</h2>
+■ジャンル<br/>
+<select id="genre_id" name="genre_id" class="small-10">
+  <option value="551167">スイーツ・お菓子</option>
+  <option value="100227">食品</option>
+<!--
+  <option value="100316">水・ソフトドリンク</option>
+  <option value="510901">日本酒・焼酎</option>
+  <option value="510915">ビール・洋酒</option>
+-->
+</select>
+<br/>
+<div id="ranking">
+  Now Loading...<br/><br/>
 </div>
+<!--
+■価格帯<br/>
+<dl class="sub-nav">
+  <dd class="active"><a href="#">指定なし</a></dd>
+  <dd><a href="#">2,000円以下</a></dd>
+  <dd><a href="#">2,000-4,000円</a></dd>
+  <dd><a href="#">4,000円以上</a></dd>
+</dl>
+-->
+<a href="#first">▲1位に戻る</a><br/>
 <script>
 $(document).ready(function(){
   google.maps.event.addDomListener(window, 'load', initialize);
+  window.location.hash = 'first';
 });
+
+$('#genre_id').change(function(){
+  $('#ranking').html('Now Loading...');
+  var genre_id = $('#genre_id').val();
+  var locate = $('#locate').val();
+  $.ajax({
+    url: '/items/search/' + locate + '?genre_id=' + genre_id,
+    settings: {
+      type: 'GET',
+      ataType: 'html'
+    }
+  }).done(function(data){
+    console.log('success');
+    console.log(data);
+    $('#ranking').html(data);
+  }).fail(function(data){
+    console.log('fail');
+  });
+});
+
 </script>

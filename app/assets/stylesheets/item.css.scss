@@ -1,0 +1,26 @@
+// Place all the styles related to the Static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#map-canvas {
+  height: 300px;
+  width: 270px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.rank {
+  font-weight: bold;
+  font-size: 120%
+}
+
+.price {
+  color: #ff0000;
+}
+
+.review {
+  font-size: 85%
+}
+
+.over:hover {
+  background-color: #aaaaee;
+}

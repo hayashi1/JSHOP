@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    rakuten_items = Item.get_rakuten_items(params[:locate], params[:type]);
+    rakuten_items = Item.get_rakuten_items(params[:locate], params[:genre_id]);
     render partial: 'items', locals: { items: rakuten_items }
   end
 

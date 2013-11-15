@@ -45,7 +45,7 @@ function initialize() {
 								//おみやげ情報の取得
 								//all
 								$.ajax({
-									url: '/items/search/' + value.long_name + '?type=all',
+									url: '/items/search/' + value.long_name + '?genre_id=551167',
 									settings: {
 										type: 'GET',
 										ataType: 'html'
@@ -55,37 +55,9 @@ function initialize() {
 									console.log(data);
 
 									//document.getElementById('rakutem-items').innerHTML(data);
-									$('#all').html(data);
-								}).fail(function(data){
-									console.log('fail');
-								});
-								//foods
-								$.ajax({
-									url: '/items/search/' + value.long_name + '?type=foods',
-									settings: {
-										type: 'GET',
-										ataType: 'html'
-									}
-								}).done(function(data){
-									console.log('success');
-									console.log(data);
-
-									//document.getElementById('rakutem-items').innerHTML(data);
-									$('#foods').html(data);
-								}).fail(function(data){
-									console.log('fail');
-								});
-								//others
-								$.ajax({
-									url: '/items/search/' + value.long_name + '?type=others',
-									settings: {
-										type: 'GET',
-										ataType: 'html'
-									}
-								}).done(function(data){
-									console.log('success');
-									console.log(data);
-									$('#others').html(data);
+									$('#ranking').html(data);
+									$('#locate').val(value.long_name);
+									window.location.hash = 'first';
 								}).fail(function(data){
 									console.log('fail');
 								});
@@ -118,4 +90,4 @@ function getPrefName(result) {
 	});
 }
 
-// google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);

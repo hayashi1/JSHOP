@@ -41,6 +41,8 @@ function initialize() {
 								var infowindow = new google.maps.InfoWindow();
 								infowindow.setContent(value.long_name);
 								infowindow.open(map, marker);
+								
+								$("#prefname").text(value.long_name + "のお土産");
 
 								//おみやげ情報の取得
 								//all

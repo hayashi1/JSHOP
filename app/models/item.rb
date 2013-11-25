@@ -14,7 +14,8 @@ class Item < ActiveRecord::Base
       'kangurume:10002301',
       'kioskgift:10000045',
       'kangurume:10002868',
-      'kyo-yakiguri:10000005'
+      'kyo-yakiguri:10000005',
+      'kyo-yakiguri:10000006'
     ],
     '北海道' => [
       'yuuzen:10000688',
@@ -119,7 +120,7 @@ class Item < ActiveRecord::Base
   private
   # 北海道以外は末尾の都府県を取り除く
   def self.cut_locate(locate)
-    locate.gsub(/(都|府|県)$/u, "")
+    locate.gsub(/(都|府|県|市)$/u, "")
   end
   # 商品名から補足説明を取り除く
   def self.clean_itemname(name)

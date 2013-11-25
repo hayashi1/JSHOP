@@ -13,12 +13,17 @@ JSHOP - お土産情報
   </div>
 </div>
 <input type="hidden" id="locate" name="locate" value="">
+<input type="hidden" id="prefecture" name="prefecture" value="">
+<input type="hidden" id="locality" name="locality" value="">
+<input type="hidden" id="search_mode" name="search_mode" value="prefecture">
 
 <a name="first"></a>
 <h2 id="prefname"></h2>
+<div id="prefecture_search" style="display:none"><a href="#">都道府県名で探す</a><br/><br/></div>
+<div id="locality_search" style="display:none"><a href="#">市区町村名で探す</a><br/><br/></div>
 ■ジャンル<br/>
 <select id="genre_id" name="genre_id" class="small-10">
-  <option value="551167">スイーツ・お菓子</option>
+  <option value="551167" selected>スイーツ・お菓子</option>
   <option value="100227">食品</option>
 <!--
   <option value="100316">水・ソフトドリンク</option>
@@ -60,6 +65,53 @@ $('#genre_id').change(function(){
     console.log('success');
     console.log(data);
     $('#ranking').html(data);
+  }).fail(function(data){
+    console.log('fail');
+  });
+});
+$('#prefecture_search').click(function(){
+  $('#ranking').html('Now Loading...');
+  $('#prefecture_search').hide();
+  var genre_id = $('#genre_id').val();
+  var locate = $('#prefecture').val();
+  $.ajax({
+    url: '/items/search/' + locate + '?genre_id=' + genre_id,
+    settings: {
+      type: 'GET',
+      ataType: 'html'
+    }
+  }).done(function(data){
+    console.log('success');
+    console.log(data);
+    $('#ranking').html(data);
+    $("#prefname").text(locate + "のお土産");
+    $('#locality_search').show();
+    $('#locate').val(locate);
+    $('#search_mode').val('prefecture');
+  }).fail(function(data){
+    console.log('fail');
+  });
+});
+$('#locality_search').click(function(){
+  $('#ranking').html('Now Loading...');
+  $('#locality_search').hide();
+  var genre_id = $('#genre_id').val();
+  var locate = $('#locality').val();
+  $.ajax({
+    url: '/items/search/' + locate + '?genre_id=' + genre_id,
+    settings: {
+      type: 'GET',
+      ataType: 'html'
+    }
+  }).done(function(data){
+    console.log('success');
+    console.log(data);
+    var locate = $('#locality').val();
+    $('#ranking').html(data);
+    $("#prefname").text(locate + "のお土産");
+    $('#prefecture_search').show();
+    $('#locate').val(locate);
+    $('#search_mode').val('locality');
   }).fail(function(data){
     console.log('fail');
   });

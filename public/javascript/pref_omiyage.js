@@ -24,6 +24,7 @@ function reloadMap(latlng) {
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
+	$('#ranking').html('');
 	$('#floatingBarsG').show();
 
 	//マップオブジェクトを生成して地図を表示
@@ -69,7 +70,6 @@ function reloadMap(latlng) {
 							reloadMap(e.latLng);
 						})
 						//おみやげ情報の取得
-						$('#ranking').html('');
 						var locate = ($('#search_mode').val() == 'prefecture') ? value.long_name : locality;
 						var genre_id = $('#genre_id').val();
 						$.ajax({

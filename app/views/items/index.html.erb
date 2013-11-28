@@ -4,7 +4,6 @@ JSHOP - お土産情報
 
 <h2>現在地</h2>
 <div id="map-canvas">
-  Now Loading...
 </div>
 <br/>
 <div class="row">
@@ -32,8 +31,17 @@ JSHOP - お土産情報
 -->
 </select>
 <br/>
+<div id="floatingBarsG" >
+  <div class="blockG" id="rotateG_01"></div>
+  <div class="blockG" id="rotateG_02"></div>
+  <div class="blockG" id="rotateG_03"></div>
+  <div class="blockG" id="rotateG_04"></div>
+  <div class="blockG" id="rotateG_05"></div>
+  <div class="blockG" id="rotateG_06"></div>
+  <div class="blockG" id="rotateG_07"></div>
+  <div class="blockG" id="rotateG_08"></div>
+</div>
 <div id="ranking">
-  Now Loading...<br/><br/>
 </div>
 <!--
 ■価格帯<br/>
@@ -49,11 +57,11 @@ JSHOP - お土産情報
 <script>
 $(document).ready(function(){
   google.maps.event.addDomListener(window, 'load', initialize);
-  window.location.hash = 'first';
 });
 
 $('#genre_id').change(function(){
-  $('#ranking').html('Now Loading...');
+  $('#ranking').html('');
+  $('#floatingBarsG').show();
   var genre_id = $('#genre_id').val();
   var locate = $('#locate').val();
   $.ajax({
@@ -66,12 +74,14 @@ $('#genre_id').change(function(){
     console.log('success');
     console.log(data);
     $('#ranking').html(data);
+    $('#floatingBarsG').hide();
   }).fail(function(data){
     console.log('fail');
   });
 });
 $('#prefecture_search').click(function(){
-  $('#ranking').html('Now Loading...');
+  $('#ranking').html('');
+  $('#floatingBarsG').show();
   $('#prefecture_search').hide();
   var genre_id = $('#genre_id').val();
   var locate = $('#prefecture').val();
@@ -85,6 +95,7 @@ $('#prefecture_search').click(function(){
     console.log('success');
     console.log(data);
     $('#ranking').html(data);
+    $('#floatingBarsG').hide();
     $("#prefname").text(locate + "のお土産");
     $('#locality_search').show();
     $('#locate').val(locate);
@@ -94,7 +105,8 @@ $('#prefecture_search').click(function(){
   });
 });
 $('#locality_search').click(function(){
-  $('#ranking').html('Now Loading...');
+  $('#ranking').html('');
+  $('#floatingBarsG').show();
   $('#locality_search').hide();
   var genre_id = $('#genre_id').val();
   var locate = $('#locality').val();
@@ -109,6 +121,7 @@ $('#locality_search').click(function(){
     console.log(data);
     var locate = $('#locality').val();
     $('#ranking').html(data);
+    $('#floatingBarsG').hide();
     $("#prefname").text(locate + "のお土産");
     $('#prefecture_search').show();
     $('#locate').val(locate);

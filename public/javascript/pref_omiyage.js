@@ -24,6 +24,8 @@ function reloadMap(latlng) {
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
+	$('#ranking').html('');
+	$('#floatingBarsG').show();
 
 	//マップオブジェクトを生成して地図を表示
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -61,7 +63,6 @@ function reloadMap(latlng) {
 						// マップクリックイベントを追加
 						google.maps.event.addListener(map, 'click', function(e)
 						{
-							$('#ranking').html('Now Loading...');
 							// ポジションを変更
 							marker.position = e.latLng;
 							// マーカーをセット
@@ -93,7 +94,7 @@ function reloadMap(latlng) {
 								$('#prefecture_search').show();
 								$('#locality_search').hide();
 							}
-							window.location.hash = 'first';
+							$('#floatingBarsG').hide();
 						}).fail(function(data){
 							console.log('fail');
 						});

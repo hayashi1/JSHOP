@@ -22,7 +22,8 @@ JSHOP - お土産情報
 <div id="locality_search" style="display:none"><a href="#">市区町村名で探す</a><br/><br/></div>
 <h3>■ジャンル</h3>
 <div class="section-container tabs" data-section="tabs" id="genere_id">
-  <section class="active">
+  <section class="active omiyage" data-categoryid="551167">
+  	<input type="hidden" class="category_id" value="551167" >
     <p class="title" data-section-title><a href="#panel1">スイーツ・お菓子</a></p>
     <div class="content" data-section-content>
       <div id="suite">
@@ -30,7 +31,8 @@ JSHOP - お土産情報
       </div>
     </div>
   </section>
-  <section>
+  <section class="omiyage" data-categoryid="100227">
+  	<input type="hidden" class="category_id" value="100227">
     <p class="title" data-section-title><a href="#panel2">食品</a></p>
     <div class="content" data-section-content>
       <div id="foods">
@@ -78,10 +80,11 @@ $(document).ready(function(){
   google.maps.event.addDomListener(window, 'load', initialize);
 });
 
-$('#genre_id').change(function(){
+$('.omiyage').click(function(){
   $('#ranking').html('');
   $('#floatingBarsG').show();
-  var genre_id = $('#genre_id').val();
+  //var genre_id = $('#genre_id').val();
+  var genre_id = $('.category_id').val();
   var locate = $('#locate').val();
   $.ajax({
     url: '/items/search/' + locate + '?genre_id=' + genre_id,

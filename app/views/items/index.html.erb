@@ -20,16 +20,37 @@ JSHOP - お土産情報
 <h2 id="prefname"></h2>
 <div id="prefecture_search" style="display:none"><a href="#">都道府県名で探す</a><br/><br/></div>
 <div id="locality_search" style="display:none"><a href="#">市区町村名で探す</a><br/><br/></div>
-■ジャンル<br/>
-<select id="genre_id" name="genre_id" class="small-10">
+<h3>■ジャンル</h3>
+<div class="section-container tabs" data-section="tabs" id="genere_id">
+  <section class="active omiyage" data-categoryid="551167">
+  	<input type="hidden" class="category_id" value="551167" >
+    <p class="title" data-section-title><a href="#panel1">スイーツ・お菓子</a></p>
+    <div class="content" data-section-content>
+      <div id="suite">
+        <%= render 'items', items: @rakuten_items %>
+      </div>
+    </div>
+  </section>
+  <section class="omiyage" data-categoryid="100227">
+  	<input type="hidden" class="category_id" value="100227">
+    <p class="title" data-section-title><a href="#panel2">食品</a></p>
+    <div class="content" data-section-content>
+      <div id="foods">
+        <%= render 'items', items: @rakuten_items %>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!--<select id="genre_id" name="genre_id" class="small-10">
   <option value="551167" selected>スイーツ・お菓子</option>
   <option value="100227">食品</option>
-<!--
+
   <option value="100316">水・ソフトドリンク</option>
   <option value="510901">日本酒・焼酎</option>
   <option value="510915">ビール・洋酒</option>
--->
-</select>
+
+</select>  -->
 <br/>
 <div id="floatingBarsG" >
   <div class="blockG" id="rotateG_01"></div>
@@ -59,10 +80,11 @@ $(document).ready(function(){
   google.maps.event.addDomListener(window, 'load', initialize);
 });
 
-$('#genre_id').change(function(){
+$('.omiyage').click(function(){
   $('#ranking').html('');
   $('#floatingBarsG').show();
-  var genre_id = $('#genre_id').val();
+  //var genre_id = $('#genre_id').val();
+  var genre_id = $('.category_id').val();
   var locate = $('#locate').val();
   $.ajax({
     url: '/items/search/' + locate + '?genre_id=' + genre_id,

@@ -52,6 +52,7 @@ gem 'httpclient'
 gem 'jquery-ui-rails'
 gem 'compass-rails'
 gem 'zurb-foundation'
+gem 'dalli'
 
 group :test do
   gem 'rspec-rails'
@@ -63,4 +64,5 @@ end
 
 group :production do
   gem 'pg'
+  gem 'memcachier'
 end

@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    @rakuten_items = [];
   end
 
   # GET /items/1

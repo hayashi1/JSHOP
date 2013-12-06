@@ -64,46 +64,22 @@ class Item < ActiveRecord::Base
     ]
   }
 
-  def self.get_rakuten_items(locate='', genre_id=nil)
+  # 商品を取得する
+  def self.get_rakuten_items(locate, genre_id=nil)
     rakuten_items = []
     begin
       return [] if locate.blank?
       locate = self.cut_locate(locate)
       genre_ids = [genre_id]
       genre_ids.each do |genre_id|
-        genre_items = [];
-        remove_code = self::REMOVE_CODES[locate].present? ? self::REMOVE_CODES[locate] : []
-        count       = 0;
-        page        = 1;
-        while true
-          httpClient = HTTPClient.new
-          data = httpClient.get_content('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805', {
-            'applicationId' => '1040308007638376273',
-            'affiliateId'   => '11b678a4.eca51fe8.11b678a5.89b6a8b9',
-            'keyword'       => locate + '　土産',
-            'genreId'       => genre_id,
-            'imageFlag'     => 1,
-            'hits'          => 30,
-            'sort'          => '-reviewCount',
-            'page'          => page
-          })
-          jsonData = JSON.parse data
-          jsonData['Items'].each do | itemData |
-            item = itemData['Item']
-            # 評価が低い商品を除外する
-            next if item['reviewAverage'].to_f < 3.5
-            # 想定外のデータを除外する
-            next if remove_code.include?(item['itemCode'])
-            # 商品名から不要な部分を削除する
-            item['itemName'] = self.clean_itemname(item['itemName'])
-            genre_items << item
-            count += 1
-            break if count == 20
-          end
-          break if count == 20 || page == jsonData['pageCount'].to_i
-          page += 1
-          # 無限ループ阻止用
-          break if page > 3
+        cache_key = self.make_cache_key(locate, genre_id)
+        cache_data = Rails.cache.read(cache_key)
+        if (cache_data.present?)
+          # キャッシュがあればキャッシュから取得する
+          genre_items = Marshal.load(cache_data)
+        else
+          # キャッシュがなければ楽天APIを実行する
+          genre_items = self.call_rakuten_api(locate, genre_id)
         end
         rakuten_items.concat genre_items
       end
@@ -122,11 +98,76 @@ class Item < ActiveRecord::Base
   def self.cut_locate(locate)
     locate.gsub(/(都|府|県|市)$/u, "")
   end
+
   # 商品名から補足説明を取り除く
   def self.clean_itemname(name)
     self::REMOVE_REGEXPS.each do |reg|
       name = name.gsub(reg, "")
     end
     name.strip
+  end
+
+  # 楽天APIから商品を取得する
+  def self.call_rakuten_api(locate, genre_id=nil)
+    genre_items = [];
+    cache_items = [];
+    remove_code = self::REMOVE_CODES[locate].present? ? self::REMOVE_CODES[locate] : []
+    count       = 0;
+    page        = 1;
+    while true
+      httpClient = HTTPClient.new
+      data = httpClient.get_content('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805', {
+        'applicationId' => '1040308007638376273',
+        'affiliateId'   => '11b678a4.eca51fe8.11b678a5.89b6a8b9',
+        'keyword'       => locate + '　土産',
+        'genreId'       => genre_id,
+        'imageFlag'     => 1,
+        'hits'          => 30,
+        'sort'          => '-reviewCount',
+        'page'          => page
+      })
+      jsonData = JSON.parse data
+      jsonData['Items'].each do | itemData |
+        item = itemData['Item']
+        # 評価が低い商品を除外する
+        next if item['reviewAverage'].to_f < 3.5
+        # 想定外のデータを除外する
+        next if remove_code.include?(item['itemCode'])
+        # 商品名から不要な部分を削除する
+        item['itemName'] = self.clean_itemname(item['itemName'])
+        genre_items << item
+        # キャッシュ用のデータを格納する
+        cache_item = self.make_cache_item(item)
+        cache_items << cache_item
+        count += 1
+        break if count == 20
+      end
+      break if count == 20 || page == jsonData['pageCount'].to_i
+      page += 1
+      # 無限ループ阻止用
+      break if page > 3
+    end
+    # キャッシュを登録する
+    cache_key = self.make_cache_key(locate, genre_id)
+    Rails.cache.write(cache_key, Marshal.dump(cache_items), {:expires_in => 1.day})
+    return genre_items
+  end
+
+  # キャッシュ用のデータを生成する
+  def self.make_cache_item(item)
+    cache_item = Hash.new
+    cache_item['itemName'] = item['itemName']
+    cache_item['itemCode'] = item['itemCode']
+    cache_item['itemUrl'] = item['itemUrl']
+    cache_item['itemPrice'] = item['itemPrice']
+    cache_item['smallImageUrls'] = [{'imageUrl' => item['smallImageUrls'][0]['imageUrl']}]
+    cache_item['reviewAverage'] = item['reviewAverage']
+    cache_item['reviewCount'] = item['reviewCount']
+    return cache_item
+  end
+
+  # キャッシュ用のキーを生成する
+  def self.make_cache_key(locate, genre_id=nil)
+    cache_key = genre_id.present? ? (locate + '_' + genre_id.to_s) : locate
   end
 end

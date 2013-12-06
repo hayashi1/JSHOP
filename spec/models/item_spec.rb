@@ -2,16 +2,22 @@ require 'spec_helper'
 
 describe 'Item' do
   context 'get_rakuten_items' do
-    it '引数なし' do
-      items = Item.get_rakuten_items();
-      expect(items).to have(0).items
-    end
-    it 'locateあり' do
+    it 'locateのみ' do
       items = Item.get_rakuten_items('東京');
       expect(items).to have_at_least(1).items
     end
-    it 'locate + genreあり' do
+    it 'locate + genre' do
       items = Item.get_rakuten_items('東京', 551167);
+      expect(items).to have_at_least(1).items
+    end
+  end
+  context 'call_rakuten_api' do
+    it 'locateのみ' do
+      items = Item.call_rakuten_api('東京');
+      expect(items).to have_at_least(1).items
+    end
+    it 'locate + genre' do
+      items = Item.call_rakuten_api('東京', 551167);
       expect(items).to have_at_least(1).items
     end
   end
@@ -35,6 +41,16 @@ describe 'Item' do
     it '横浜市' do
       locate = Item.cut_locate('横浜市');
       expect(locate).to eq('横浜')
+    end
+  end
+  context 'make_cache_key' do
+    it 'locateのみ' do
+      key = Item.make_cache_key('東京');
+      expect(key).to eq('東京')
+    end
+    it 'locate + genre' do
+      key = Item.make_cache_key('東京', 551167);
+      expect(key).to eq('東京_551167')
     end
   end
 end

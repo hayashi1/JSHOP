@@ -71,7 +71,7 @@ function reloadMap(latlng) {
 						})
 						//おみやげ情報の取得
 						var locate = ($('#search_mode').val() == 'prefecture') ? value.long_name : locality;
-						var genre_id = $('#genre_id').val();
+						var genre_id = $('.category_id').val();
 						$.ajax({
 							url: '/items/search/' + locate + '?genre_id=' + genre_id,
 							settings: {

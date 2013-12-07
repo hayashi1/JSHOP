@@ -15,6 +15,12 @@ function initialize() {
 		});
 	} else {
 		//HTML5　navigator.geolocationが使えない場合
+		alert('位置情報を使用できない設定になっているため、位置を東京にセットします。');
+		lat = 35.681382;
+		lng = 139.766084;
+		//緯度,経度をgoogle.maps.LatLngオブジェクトに
+		var latlng = new google.maps.LatLng(lat, lng);
+		reloadMap(latlng)
 	}
 }
 

@@ -21,7 +21,7 @@ function loadCurrentPosition(position) {
 	var lng = position.coords.longitude;
 	//緯度,経度をgoogle.maps.LatLngオブジェクトに
 	var latlng = new google.maps.LatLng(lat, lng);
-	reloadMap(latlng)
+	reloadMap(latlng);
 }
 
 function loadTemporaryPosition() {
@@ -31,7 +31,7 @@ function loadTemporaryPosition() {
 	lat = 35.681382;
 	lng = 139.766084;
 	var latlng = new google.maps.LatLng(lat, lng);
-	reloadMap(latlng)
+	reloadMap(latlng);
 }
 
 function reloadMap(latlng) {

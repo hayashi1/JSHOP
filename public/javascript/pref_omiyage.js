@@ -4,24 +4,34 @@ var geocoder;
 function initialize() {
 	//位置情報が利用できるか判定
 	if ( navigator.geolocation ) {
-		navigator.geolocation.getCurrentPosition(function(position){
-			//緯度
-			var lat = position.coords.latitude;
-			//経度
-			var lng = position.coords.longitude;
-			//緯度,経度をgoogle.maps.LatLngオブジェクトに
-			var latlng = new google.maps.LatLng(lat, lng);
-			reloadMap(latlng)
-		});
+		navigator.geolocation.getCurrentPosition(
+			loadCurrentPosition,
+			loadTemporaryPosition,
+			{timeout:6000}
+		);
 	} else {
-		//HTML5　navigator.geolocationが使えない場合
-		alert('位置情報を使用できない設定になっているため、位置を東京にセットします。');
-		lat = 35.681382;
-		lng = 139.766084;
-		//緯度,経度をgoogle.maps.LatLngオブジェクトに
-		var latlng = new google.maps.LatLng(lat, lng);
-		reloadMap(latlng)
+		loadTemporaryPosition();
 	}
+}
+
+function loadCurrentPosition(position) {
+	//緯度
+	var lat = position.coords.latitude;
+	//経度
+	var lng = position.coords.longitude;
+	//緯度,経度をgoogle.maps.LatLngオブジェクトに
+	var latlng = new google.maps.LatLng(lat, lng);
+	reloadMap(latlng);
+}
+
+function loadTemporaryPosition() {
+	//HTML5　navigator.geolocationが使えない場合
+	$('#error_dialog').foundation('reveal', 'open');
+	//東京駅の座標をセット
+	lat = 35.681382;
+	lng = 139.766084;
+	var latlng = new google.maps.LatLng(lat, lng);
+	reloadMap(latlng);
 }
 
 function reloadMap(latlng) {

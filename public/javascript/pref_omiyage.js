@@ -40,7 +40,6 @@ function reloadMap(latlng) {
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
-	$('#ranking').html('');
 	$('#floatingBarsG').show();
 
 	//マップオブジェクトを生成して地図を表示
@@ -87,7 +86,7 @@ function reloadMap(latlng) {
 						})
 						//おみやげ情報の取得
 						var locate = ($('#search_mode').val() == 'prefecture') ? value.long_name : locality;
-						var genre_id = $('.category_id').val();
+						var genre_id = $('#genre_id').val();
 						$.ajax({
 							url: '/items/search/' + locate + '?genre_id=' + genre_id,
 							settings: {
@@ -136,6 +135,37 @@ function getPrefName(result) {
 			console.log(value.long_name);
 			return value.long_name;
 		}
+	});
+}
+
+function reloadRanking(mode, locate, genre_id) {
+	$('#floatingBarsG').show();
+	$.ajax({
+		url: '/items/search/' + locate + '?genre_id=' + genre_id,
+		settings: {
+			type: 'GET',
+			ataType: 'html'
+		}
+	}).done(function(data){
+		console.log('success');
+		console.log(data);
+		$('#ranking').html(data);
+		$('#floatingBarsG').hide();
+		$('#genre_id').val(genre_id);
+		$("#prefname").text(locate + "のお土産");
+		$('#locate').val(locate);
+		if (mode == 'prefecture_search') {
+			$('#prefecture_search').hide();
+			$('#locality_search').show();
+			$('#search_mode').val('prefecture');
+		}
+		if (mode == 'locality_search') {
+			$('#prefecture_search').show();
+			$('#locality_search').hide();
+			$('#search_mode').val('locality');
+		}
+	}).fail(function(data){
+		console.log('fail');
 	});
 }
 

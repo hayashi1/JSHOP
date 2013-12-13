@@ -11,38 +11,22 @@ JSHOP - お土産情報
 </p>
 <div class="center">
   <%= button_tag('都道府県名で探す', {type:'button', id:'prefecture_search', class:'small button', style:'display:none'}) %>
-  <%= button_tag('市区町村名で探す', {type:'button', id:'locality_search', class:'small button', style:'display:none'}) %>
+  <%= button_tag('市区町村名で探す', {type:'button', id:'locality_search', class:'small button'}) %>
 </div>
 <input type="hidden" id="locate" name="locate" value="">
 <input type="hidden" id="prefecture" name="prefecture" value="">
 <input type="hidden" id="locality" name="locality" value="">
 <input type="hidden" id="search_mode" name="search_mode" value="prefecture">
-<input type="hidden" id="genre_id" name="genre_id" value="">
+<input type="hidden" id="genre_id" name="genre_id" value="551167">
 
 <a name="first"></a>
 <h2 id="prefname"></h2>
-<div class="section-container tabs" data-section="tabs" id="genere_id">
-  <section class="active omiyage" data-categoryid="551167">
-    <input type="hidden" class="category_id" value="551167" >
-    <p class="title" data-section-title><a href="#panel1">お菓子</a></p>
-    <div class="content" data-section-content>
-      <div id="suite">
-        <%= render 'items', items: @rakuten_items %>
-      </div>
-    </div>
-  </section>
-  <section class="omiyage" data-categoryid="100227">
-    <input type="hidden" class="category_id" value="100227">
-    <p class="title" data-section-title><a href="#panel2">食品全体</a></p>
-    <div class="content" data-section-content>
-      <div id="foods">
-        <%= render 'items', items: @rakuten_items %>
-      </div>
-    </div>
-  </section>
-</div>
-<br/>
-<div id="floatingBarsG" >
+<dl class="sub-nav sub-nav-center">
+  <dt><span class="sub-nav-caption">ジャンル：</span></dt>
+  <dd id="sweets_search" class="active"><a>お菓子</a></dd>
+  <dd id="foods_search"><a>食品全体</a></dd>
+</dl>
+<div id="floatingBarsG" class="center">
   <div class="blockG" id="rotateG_01"></div>
   <div class="blockG" id="rotateG_02"></div>
   <div class="blockG" id="rotateG_03"></div>
@@ -54,6 +38,7 @@ JSHOP - お土産情報
 </div>
 <div id="ranking">
 </div>
+<br/>
 <div class="center">
   <a href="#first">▲1位に戻る</a>
 </div>
@@ -67,79 +52,33 @@ $(document).ready(function(){
   google.maps.event.addDomListener(window, 'load', initialize);
 });
 
-$('.omiyage').click(function(){
-  $('#ranking').html('');
-  $('#floatingBarsG').show();
-  var genre_id = $('.category_id').val();
+$('#sweets_search').click(function(){
+  $('#sweets_search').addClass('active');
+  $('#foods_search').removeClass('active');
+  var genre_id = 551167;
   var locate = $('#locate').val();
-  $.ajax({
-    url: '/items/search/' + locate + '?genre_id=' + genre_id,
-    settings: {
-      type: 'GET',
-      ataType: 'html'
-    }
-  }).done(function(data){
-    console.log('success');
-    console.log(data);
-    $('#ranking').html(data);
-    $('#floatingBarsG').hide();
-    $('#genre_id').val(genre_id);
-  }).fail(function(data){
-    console.log('fail');
-  });
-});
-$('#prefecture_search').click(function(){
-  $('#ranking').html('');
-  $('#floatingBarsG').show();
-  var genre_id = $('#genre_id').val();
-  var locate = $('#prefecture').val();
-  $.ajax({
-    url: '/items/search/' + locate + '?genre_id=' + genre_id,
-    settings: {
-      type: 'GET',
-      ataType: 'html'
-    }
-  }).done(function(data){
-    console.log('success');
-    console.log(data);
-    $('#ranking').html(data);
-    $('#floatingBarsG').hide();
-    $("#prefname").text(locate + "のお土産");
-    $('#prefecture_search').hide();
-    $('#locality_search').show();
-    $('#locate').val(locate);
-    $('#search_mode').val('prefecture');
-  }).fail(function(data){
-    console.log('fail');
-  });
-});
-$('#locality_search').click(function(){
-  $('#ranking').html('');
-  $('#floatingBarsG').show();
-  var genre_id = $('#genre_id').val();
-  var locate = $('#locality').val();
-  $.ajax({
-    url: '/items/search/' + locate + '?genre_id=' + genre_id,
-    settings: {
-      type: 'GET',
-      ataType: 'html'
-    }
-  }).done(function(data){
-    console.log('success');
-    console.log(data);
-    var locate = $('#locality').val();
-    $('#ranking').html(data);
-    $('#floatingBarsG').hide();
-    $("#prefname").text(locate + "のお土産");
-    $('#locality_search').hide();
-    $('#prefecture_search').show();
-    $('#locate').val(locate);
-    $('#search_mode').val('locality');
-  }).fail(function(data){
-    console.log('fail');
-  });
+  reloadRanking('sweets_search', locate, genre_id);
 });
 
+$('#foods_search').click(function(){
+  $('#sweets_search').removeClass('active');
+  $('#foods_search').addClass('active');
+  var genre_id = 100227;
+  var locate = $('#locate').val();
+  reloadRanking('foods_search', locate, genre_id);
+});
+
+$('#prefecture_search').click(function(){
+  var genre_id = $('#genre_id').val();
+  var locate = $('#prefecture').val();
+  reloadRanking('prefecture_search', locate, genre_id);
+});
+
+$('#locality_search').click(function(){
+  var genre_id = $('#genre_id').val();
+  var locate = $('#locality').val();
+  reloadRanking('locality_search', locate, genre_id);
+});
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -2,7 +2,7 @@
 JSHOPへようこそ
 <% end %>
 
-<p>
+<p class="center">
 お土産品『勝手に』ランキングサイトへようこそ。<br/>
 このサイトでは、現在地の情報と引き換えに、<br/>
 現在地でのお土産品のランキング情報を提供します。<br/>
@@ -14,15 +14,12 @@ JSHOPへようこそ
 ※注意：このサイトのお土産品のランキングは<br/>
 楽天のAPIを基にした、ランキング情報です。<br/>
 </p>
-※以下の端末で動作確認済みです。
-<br>
-<ul>
-  <li>Android4.0.4 Firefox</li>
-  <li>iOS7.0.4 Safari</li>
-</ul>
 
-<div class="row">
-  <div class="small-6 small-centered columns">
-    <%= link_to('現在地情報を送る', {controller:'items', action:'index'}, {class:'button'}) %>
-  </div>
+<div class="center">
+  <%= link_to('現在地情報を送る', {controller:'items', action:'index'}, {type:'button', class:'button link_button'}) %>
 </div>
+<p class="center">
+※以下の端末で動作確認済みです。<br/>
+Android4.0.4 Firefox<br/>
+iOS7.0.4 Safari<br/>
+</p>

@@ -103,6 +103,7 @@ function reloadMap(latlng) {
 							$("#prefname").text(locate + "のお土産");
 							$('#prefecture').val(value.long_name);
 							$('#locality').val(locality);
+							$('#genre_id').val(genre_id);
 							if ($('#search_mode').val() == 'prefecture') {
 								$('#prefecture_search').hide();
 								$('#locality_search').show();

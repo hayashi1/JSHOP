@@ -5,16 +5,16 @@
 #map-canvas {
   height: 300px;
   width: 98%;
-  margin: 20px;
-  padding: 0px;
+  margin: 15px;
+  text-align: center;
 }
 
 @media screen and (max-width: 400px){
   #map-canvas {
     height: 250px;
     width: 98%;
-    margin: 20px;
-    padding: 0px;
+    margin: 15px;
+    text-align: center;
   }
 }
 .rank {
@@ -32,6 +32,10 @@
 
 .over:hover {
   background-color: #aaaaee;
+}
+
+h2 {
+  text-align: center;
 }
 
 #floatingBarsG{

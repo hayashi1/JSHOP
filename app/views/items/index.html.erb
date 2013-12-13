@@ -5,25 +5,25 @@ JSHOP - お土産情報
 <h2>現在地</h2>
 <div id="map-canvas">
 </div>
-<br/>
-<div class="row">
-  <div class="small-6 small-centered columns">
-    <%= button_to_function('リロード', 'location.reload()', {class:'tiny button secondary'}) %>
-  </div>
+<p class="center">
+地図をタップして現在地を変更できます。<br/>
+地図をドラッグして動かすことができます。
+</p>
+<div class="center">
+  <%= button_tag('都道府県名で探す', {type:'button', id:'prefecture_search', class:'small button', style:'display:none'}) %>
+  <%= button_tag('市区町村名で探す', {type:'button', id:'locality_search', class:'small button', style:'display:none'}) %>
 </div>
 <input type="hidden" id="locate" name="locate" value="">
 <input type="hidden" id="prefecture" name="prefecture" value="">
 <input type="hidden" id="locality" name="locality" value="">
 <input type="hidden" id="search_mode" name="search_mode" value="prefecture">
+<input type="hidden" id="genre_id" name="genre_id" value="">
 
 <a name="first"></a>
 <h2 id="prefname"></h2>
-<div id="prefecture_search" style="display:none"><a href="#">都道府県名で探す</a><br/><br/></div>
-<div id="locality_search" style="display:none"><a href="#">市区町村名で探す</a><br/><br/></div>
-<h3>■ジャンル</h3>
 <div class="section-container tabs" data-section="tabs" id="genere_id">
   <section class="active omiyage" data-categoryid="551167">
-  	<input type="hidden" class="category_id" value="551167" >
+    <input type="hidden" class="category_id" value="551167" >
     <p class="title" data-section-title><a href="#panel1">お菓子</a></p>
     <div class="content" data-section-content>
       <div id="suite">
@@ -32,7 +32,7 @@ JSHOP - お土産情報
     </div>
   </section>
   <section class="omiyage" data-categoryid="100227">
-  	<input type="hidden" class="category_id" value="100227">
+    <input type="hidden" class="category_id" value="100227">
     <p class="title" data-section-title><a href="#panel2">食品全体</a></p>
     <div class="content" data-section-content>
       <div id="foods">
@@ -41,16 +41,6 @@ JSHOP - お土産情報
     </div>
   </section>
 </div>
-
-<!--<select id="genre_id" name="genre_id" class="small-10">
-  <option value="551167" selected>スイーツ・お菓子</option>
-  <option value="100227">食品</option>
-
-  <option value="100316">水・ソフトドリンク</option>
-  <option value="510901">日本酒・焼酎</option>
-  <option value="510915">ビール・洋酒</option>
-
-</select>  -->
 <br/>
 <div id="floatingBarsG" >
   <div class="blockG" id="rotateG_01"></div>
@@ -64,17 +54,13 @@ JSHOP - お土産情報
 </div>
 <div id="ranking">
 </div>
-<!--
-■価格帯<br/>
-<dl class="sub-nav">
-  <dd class="active"><a href="#">指定なし</a></dd>
-  <dd><a href="#">2,000円以下</a></dd>
-  <dd><a href="#">2,000-4,000円</a></dd>
-  <dd><a href="#">4,000円以上</a></dd>
-</dl>
--->
-<a href="#first">▲1位に戻る</a><br/>
-<a href="https://docs.google.com/forms/d/1hAMqDp2ej4d3NB1ico5Oa0gQY3HC8nSi5kb-_ZwsxEQ/viewform">ご意見・ご感想</a><br/>
+<div class="center">
+  <a href="#first">▲1位に戻る</a>
+</div>
+<br/>
+<div class="center">
+  <a href="https://docs.google.com/forms/d/1hAMqDp2ej4d3NB1ico5Oa0gQY3HC8nSi5kb-_ZwsxEQ/viewform">ご意見・ご感想</a>
+</div>
 <%= render :partial => 'error_dialog' %>
 <script>
 $(document).ready(function(){
@@ -84,7 +70,6 @@ $(document).ready(function(){
 $('.omiyage').click(function(){
   $('#ranking').html('');
   $('#floatingBarsG').show();
-  //var genre_id = $('#genre_id').val();
   var genre_id = $('.category_id').val();
   var locate = $('#locate').val();
   $.ajax({
@@ -98,6 +83,7 @@ $('.omiyage').click(function(){
     console.log(data);
     $('#ranking').html(data);
     $('#floatingBarsG').hide();
+    $('#genre_id').val(genre_id);
   }).fail(function(data){
     console.log('fail');
   });
@@ -105,7 +91,6 @@ $('.omiyage').click(function(){
 $('#prefecture_search').click(function(){
   $('#ranking').html('');
   $('#floatingBarsG').show();
-  $('#prefecture_search').hide();
   var genre_id = $('#genre_id').val();
   var locate = $('#prefecture').val();
   $.ajax({
@@ -120,6 +105,7 @@ $('#prefecture_search').click(function(){
     $('#ranking').html(data);
     $('#floatingBarsG').hide();
     $("#prefname").text(locate + "のお土産");
+    $('#prefecture_search').hide();
     $('#locality_search').show();
     $('#locate').val(locate);
     $('#search_mode').val('prefecture');
@@ -130,7 +116,6 @@ $('#prefecture_search').click(function(){
 $('#locality_search').click(function(){
   $('#ranking').html('');
   $('#floatingBarsG').show();
-  $('#locality_search').hide();
   var genre_id = $('#genre_id').val();
   var locate = $('#locality').val();
   $.ajax({
@@ -146,6 +131,7 @@ $('#locality_search').click(function(){
     $('#ranking').html(data);
     $('#floatingBarsG').hide();
     $("#prefname").text(locate + "のお土産");
+    $('#locality_search').hide();
     $('#prefecture_search').show();
     $('#locate').val(locate);
     $('#search_mode').val('locality');

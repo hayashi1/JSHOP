@@ -4,7 +4,7 @@
 <!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="ja"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
 
@@ -23,7 +23,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-    <script type="text/javascript" src="/javascript/pref_omiyage.js"></script>
+    <script type="text/javascript" src="/javascript/pref_omiyage.js?20131212"></script>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "vendor/custom.modernizr" %>
@@ -32,17 +32,15 @@
 
   <body>
 
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name"><h1>JSHOP</h1></li>
-    </ul>
-  </nav>
-  <br>
+  <div class="header">
+    JSHOP
+  </div>
+  <br/>
   <%= yield %>
-  <br>
+  <br/>
   <div class="footer">
-    footer
+    © 2013 チーム5倍返し
   </div>
 
-</body>
+  </body>
 </html>
